@@ -2,6 +2,7 @@
 
 namespace Alfonsobries\LaravelCommentable\Models;
 
+use Alfonsobries\LaravelCommentable\Traits\HasCommentEvents;
 use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Comment extends Model
 {
     use UsesUuid;
+    use HasCommentEvents;
 
     /**
      * The attributes that are mass assignable.
