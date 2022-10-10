@@ -35,6 +35,16 @@ class Comment extends Model implements CommentableInterface
     ];
 
     /**
+     * Get the table associated with the model.
+     *
+     * @return string
+     */
+    public function getTable()
+    {
+        return config('laravel-commentable.tables.comments');
+    }
+
+    /**
      * The attributes that should be cast.
      *
      * @var array

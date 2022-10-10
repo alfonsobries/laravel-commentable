@@ -108,3 +108,16 @@ test('a comment can receive another comment with the replyFrom method', function
     expect($reply->commentable_type)->toBe($comment->getMorphClass());
     expect($reply->agent_id)->toBe($agent->id);
 });
+
+it('uses the table name from the config file', function () {
+    $agent = Agent::create();
+    $commentable = Commentable::create();
+
+    $comment = $agent->comment($commentable, 'This is a comment');
+
+    expect($comment->getTable())->toBe('comments');
+
+    config(['laravel-commentable.tables.comments' => 'custom_comments']);
+
+    expect($comment->getTable())->toBe('custom_comments');
+});
