@@ -8,7 +8,7 @@ use Tests\Fixtures\Models\Agent;
 use Tests\Fixtures\Models\Commentable;
 
 test('a commentable model have many comments', function () {
-    $agent = Agent::create();
+    $agent  = Agent::create();
     $agent2 = Agent::create();
 
     $commentable = Commentable::create();
@@ -41,7 +41,6 @@ test('a commentable can receive a comment from an agent', function () {
 
     expect($comment->agent)->toBeInstanceOf(CanCommentInterface::class);
 });
-
 
 test('stores the request ip address', function () {
     $commentable = Commentable::create();

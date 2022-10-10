@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alfonsobries\LaravelCommentable\Models;
 
 use Alfonsobries\LaravelCommentable\Contracts\CanCommentInterface;
@@ -9,10 +11,10 @@ use Alfonsobries\LaravelCommentable\Traits\Commentable;
 use Alfonsobries\LaravelCommentable\Traits\HasCommentEvents;
 use Alfonsobries\LaravelCommentable\Traits\HasReactions;
 use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Carbon\Carbon;
 
 /**
  * @property ?Carbon $approved_at

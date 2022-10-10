@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alfonsobries\LaravelCommentable\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Alfonsobries\LaravelCommentable\Enums\CommentReactionTypeEnum;
+use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CommentReaction extends Model
 {

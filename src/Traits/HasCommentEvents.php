@@ -18,35 +18,35 @@ trait HasCommentEvents
 {
     public static function bootHasCommentEvents(): void
     {
-        static::saving(function (Model $model) {
+        static::saving(static function (Model $model) {
             event(new CommentSaving($model));
         });
 
-        static::saved(function (Model $model) {
+        static::saved(static function (Model $model) {
             event(new CommentSaved($model));
         });
 
-        static::creating(function (Model $model) {
+        static::creating(static function (Model $model) {
             event(new CommentCreating($model));
         });
 
-        static::created(function (Model $model) {
+        static::created(static function (Model $model) {
             event(new CommentCreated($model));
         });
 
-        static::updating(function (Model $model) {
+        static::updating(static function (Model $model) {
             event(new CommentUpdating($model));
         });
 
-        static::updated(function (Model $model) {
+        static::updated(static function (Model $model) {
             event(new CommentUpdated($model));
         });
 
-        static::deleting(function (Model $model) {
+        static::deleting(static function (Model $model) {
             event(new CommentDeleting($model));
         });
 
-        static::deleted(function (Model $model) {
+        static::deleted(static function (Model $model) {
             event(new CommentDeleted($model));
         });
     }

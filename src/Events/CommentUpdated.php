@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alfonsobries\LaravelCommentable\Events;
 
 use Illuminate\Database\Eloquent\Model;

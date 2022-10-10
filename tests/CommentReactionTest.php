@@ -11,16 +11,16 @@ use Tests\Fixtures\Models\Commentable;
 
 beforeEach(function () {
     $this->comment = Comment::forceCreate([
-        'commentable_id' => 1,
+        'commentable_id'   => 1,
         'commentable_type' => Commentable::class,
-        'agent_id' => 1,
-        'comment' => 'This is a comment',
+        'agent_id'         => 1,
+        'comment'          => 'This is a comment',
     ]);
 
     $this->commentReaction  = CommentReaction::forceCreate([
         'comment_id' => $this->comment->id,
-        'agent_id' => 1,
-        'type' => CommentReactionTypeEnum::Like,
+        'agent_id'   => 1,
+        'type'       => CommentReactionTypeEnum::Like,
     ]);
 
     $this->agent = Agent::create();
@@ -42,14 +42,14 @@ test('the reaction has a comment model', function () {
 it('filters likes reactions', function () {
     CommentReaction::forceCreate([
         'comment_id' => $this->comment->id,
-        'agent_id' => Agent::create()->id,
-        'type' => CommentReactionTypeEnum::Like,
+        'agent_id'   => Agent::create()->id,
+        'type'       => CommentReactionTypeEnum::Like,
     ]);
 
     CommentReaction::forceCreate([
         'comment_id' => $this->comment->id,
-        'agent_id' =>  Agent::create()->id,
-        'type' => CommentReactionTypeEnum::Dislike,
+        'agent_id'   => Agent::create()->id,
+        'type'       => CommentReactionTypeEnum::Dislike,
     ]);
 
     // The one created in the beforeEach method + the one created here
@@ -59,14 +59,14 @@ it('filters likes reactions', function () {
 it('filters dislikes reactions', function () {
     CommentReaction::forceCreate([
         'comment_id' => $this->comment->id,
-        'agent_id' => Agent::create()->id,
-        'type' => CommentReactionTypeEnum::Like,
+        'agent_id'   => Agent::create()->id,
+        'type'       => CommentReactionTypeEnum::Like,
     ]);
 
     CommentReaction::forceCreate([
         'comment_id' => $this->comment->id,
-        'agent_id' =>  Agent::create()->id,
-        'type' => CommentReactionTypeEnum::Dislike,
+        'agent_id'   => Agent::create()->id,
+        'type'       => CommentReactionTypeEnum::Dislike,
     ]);
 
     // The one created in the beforeEach method + the one created here is like

@@ -52,6 +52,7 @@
         "analyse": "./vendor/bin/phpstan analyse",
         "refactor": "./vendor/bin/rector process",
         "format": "./vendor/bin/php-cs-fixer fix",
+        "prepare": "composer analyse && composer refactor && composer format",
         "test": "./vendor/bin/pest",
         "test:coverage": "./vendor/bin/pest --coverage --min=100 --coverage-html=.coverage --coverage-clover=coverage.xml"
     }

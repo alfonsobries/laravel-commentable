@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
+use Alfonsobries\LaravelCommentable\Enums\CommentReactionTypeEnum;
 use Alfonsobries\LaravelCommentable\Models\Comment;
 use Tests\Fixtures\Models\Agent;
 use Tests\Fixtures\Models\Commentable;
-use Alfonsobries\LaravelCommentable\Enums\CommentReactionTypeEnum;
 
 test('a comment has an agent', function () {
     $agent = Agent::create();
 
     $commentable = Commentable::create();
-    $comment = $agent->comment($commentable, 'This is a comment');
+    $comment     = $agent->comment($commentable, 'This is a comment');
 
     expect($comment->agent_id)->toBe($agent->id);
 
@@ -26,7 +26,7 @@ test('a comment has a commentable model', function () {
     $agent = Agent::create();
 
     $commentable = Commentable::create();
-    $comment = $agent->comment($commentable, 'This is a comment');
+    $comment     = $agent->comment($commentable, 'This is a comment');
 
     $commentCommentable = $comment->commentable;
 
@@ -36,9 +36,9 @@ test('a comment has a commentable model', function () {
 });
 
 test('the comment can be approved/unaproved', function () {
-    $agent = Agent::create();
+    $agent       = Agent::create();
     $commentable = Commentable::create();
-    $comment = $agent->comment($commentable, 'This is a comment');
+    $comment     = $agent->comment($commentable, 'This is a comment');
 
     expect($comment->isApproved())->toBeFalse();
 
@@ -51,18 +51,17 @@ test('the comment can be approved/unaproved', function () {
     expect($comment->isApproved())->toBeFalse();
 });
 
-it ('filters approved and not approved comments', function () {
-    $agent = Agent::create();
+it('filters approved and not approved comments', function () {
+    $agent       = Agent::create();
     $commentable = Commentable::create();
-    $comment1 = $agent->comment($commentable, 'This is a comment');
-    $comment2 = $agent->comment($commentable, 'This is a comment');
-    $comment3 = $agent->comment($commentable, 'This is a comment');
+    $comment1    = $agent->comment($commentable, 'This is a comment');
+    $comment2    = $agent->comment($commentable, 'This is a comment');
+    $comment3    = $agent->comment($commentable, 'This is a comment');
 
     $comment1->approve();
     $comment2->approve();
 
-
-    $approvedComments = $commentable->comments()->approved()->get();
+    $approvedComments    = $commentable->comments()->approved()->get();
     $notApprovedComments = $commentable->comments()->notApproved()->get();
 
     expect($approvedComments->count())->toBe(2);
@@ -75,7 +74,6 @@ test('a comment can receive another comment', function () {
     $comment = $commentable->addComment('some comment');
 
     $reply = $comment->addComment('some reply');
-
 
     expect($reply)->toBeInstanceOf(Comment::class);
 
@@ -97,7 +95,7 @@ test('a comment can receive another comment with the reply method', function () 
 });
 
 test('a comment can receive another comment with the replyFrom method', function () {
-    $agent = Agent::create();
+    $agent       = Agent::create();
     $commentable = Commentable::create();
 
     $comment = $commentable->addComment('some comment');
@@ -111,7 +109,7 @@ test('a comment can receive another comment with the replyFrom method', function
 });
 
 it('uses the table name from the config file', function () {
-    $agent = Agent::create();
+    $agent       = Agent::create();
     $commentable = Commentable::create();
 
     $comment = $agent->comment($commentable, 'This is a comment');
@@ -124,9 +122,9 @@ it('uses the table name from the config file', function () {
 });
 
 test('an agent can react to a comment', function () {
-    $agent = Agent::create();
+    $agent       = Agent::create();
     $commentable = Commentable::create();
-    $comment = $agent->comment($commentable, 'This is a comment');
+    $comment     = $agent->comment($commentable, 'This is a comment');
 
     $comment->react(CommentReactionTypeEnum::Like, $agent);
 
@@ -138,9 +136,9 @@ test('an agent can react to a comment', function () {
 });
 
 test('an agent can like a comment', function () {
-    $agent = Agent::create();
+    $agent       = Agent::create();
     $commentable = Commentable::create();
-    $comment = $agent->comment($commentable, 'This is a comment');
+    $comment     = $agent->comment($commentable, 'This is a comment');
 
     $comment->like($agent);
 
@@ -152,9 +150,9 @@ test('an agent can like a comment', function () {
 });
 
 test('an agent can dislike a comment', function () {
-    $agent = Agent::create();
+    $agent       = Agent::create();
     $commentable = Commentable::create();
-    $comment = $agent->comment($commentable, 'This is a comment');
+    $comment     = $agent->comment($commentable, 'This is a comment');
 
     $comment->dislike($agent);
 
@@ -165,11 +163,10 @@ test('an agent can dislike a comment', function () {
     expect($comment->likes()->count())->toBe(0);
 });
 
-
 test('accepts reactions without agent', function () {
-    $agent = Agent::create();
+    $agent       = Agent::create();
     $commentable = Commentable::create();
-    $comment = $agent->comment($commentable, 'This is a comment');
+    $comment     = $agent->comment($commentable, 'This is a comment');
 
     $comment->react(CommentReactionTypeEnum::Dislike);
 

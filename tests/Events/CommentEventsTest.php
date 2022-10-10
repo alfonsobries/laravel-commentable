@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Alfonsobries\LaravelCommentable\Events\CommentCreated;
 use Alfonsobries\LaravelCommentable\Events\CommentCreating;
 use Alfonsobries\LaravelCommentable\Events\CommentDeleted;

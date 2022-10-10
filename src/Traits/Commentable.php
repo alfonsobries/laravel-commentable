@@ -18,7 +18,7 @@ trait Commentable
     public function addComment(string $comment, array $extraAttributes = []): Model
     {
         return $this->comments()->create([
-            'comment' => $comment,
+            'comment'    => $comment,
             'ip_address' => request()->ip(),
             'user_agent' => request()->userAgent(),
             ...$extraAttributes,

@@ -6,6 +6,6 @@ namespace Alfonsobries\LaravelCommentable\Enums;
 
 enum CommentReactionTypeEnum: string
 {
-    case Like = 'like';
+    case Like    = 'like';
     case Dislike = 'dislike';
 }
