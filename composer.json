@@ -1,6 +1,6 @@
 {
     "name": "alfonsobries/laravel-commentable",
-    "description": "TBD",
+    "description": "A Laravel package to add comments to any model",
     "type": "library",
     "license": "MIT",
     "authors": [
