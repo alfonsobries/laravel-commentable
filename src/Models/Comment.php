@@ -2,19 +2,23 @@
 
 namespace Alfonsobries\LaravelCommentable\Models;
 
+use Alfonsobries\LaravelCommentable\Contracts\CanComment;
+use Alfonsobries\LaravelCommentable\Contracts\HasComments;
 use Alfonsobries\LaravelCommentable\Traits\Approvable;
+use Alfonsobries\LaravelCommentable\Traits\Commentable;
 use Alfonsobries\LaravelCommentable\Traits\HasCommentEvents;
 use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Comment extends Model
+class Comment extends Model implements HasComments
 {
     use UsesUuid;
     use HasCommentEvents;
     use SoftDeletes;
     use Approvable;
+    use Commentable;
 
     /**
      * The attributes that are mass assignable.
@@ -49,4 +53,13 @@ class Comment extends Model
         return $this->morphTo();
     }
 
+    public function reply(string $comment, array $extraAttributes = []): Model
+    {
+        return $this->addComment($comment, $extraAttributes);
+    }
+
+    public function replyFrom(CanComment $agent, string $comment, array $extraAttributes = []): Model
+    {
+        return $this->addCommentFrom($agent, $comment, $extraAttributes);
+    }
 }

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Alfonsobries\LaravelCommentable\Models\Comment;
 use Tests\Fixtures\Models\Agent;
 use Tests\Fixtures\Models\Commentable;
 
@@ -65,4 +66,45 @@ it ('filters approved and not approved comments', function () {
 
     expect($approvedComments->count())->toBe(2);
     expect($notApprovedComments->count())->toBe(1);
+});
+
+test('a comment can receive another comment', function () {
+    $commentable = Commentable::create();
+
+    $comment = $commentable->addComment('some comment');
+
+    $reply = $comment->addComment('some reply');
+
+
+    expect($reply)->toBeInstanceOf(Comment::class);
+
+    expect($reply->commentable_type)->toBe($comment->getMorphClass());
+    expect($reply->commentable_id)->toBe($comment->getKey());
+});
+
+test('a comment can receive another comment with the reply method', function () {
+    $commentable = Commentable::create();
+
+    $comment = $commentable->addComment('some comment');
+
+    $reply = $comment->reply('some reply');
+
+    expect($reply)->toBeInstanceOf(Comment::class);
+
+    expect($reply->commentable_type)->toBe($comment->getMorphClass());
+    expect($reply->commentable_id)->toBe($comment->getKey());
+});
+
+test('a comment can receive another comment with the replyFrom method', function () {
+    $agent = Agent::create();
+    $commentable = Commentable::create();
+
+    $comment = $commentable->addComment('some comment');
+
+    $reply = $comment->replyFrom($agent, 'some reply');
+
+    expect($reply)->toBeInstanceOf(Comment::class);
+
+    expect($reply->commentable_type)->toBe($comment->getMorphClass());
+    expect($reply->agent_id)->toBe($agent->id);
 });

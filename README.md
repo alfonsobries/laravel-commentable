@@ -94,6 +94,40 @@ $blogPost = BlogPost::first();
 $comment = $user->comment($blogPost, 'my comment');
 ```
 
+### Add replies to comments
+
+1. The `Comment` method is another commentable instance, meaning you can use the `addComment` or `addCommentFrom` method to add a reply.
+
+2. You can also use the `reply` and `replyFrom` methods that are just an alias for the comments above. 
+
+
+```php
+$user = User::create([...]);
+$user2 = User::create([...]);
+$blogPost = BlogPost::first();
+
+$comment = $blogPost->commentFrom($user, 'my comment');
+$comment->replyFrom($user2, 'a reply');
+```
+
+2. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanComment` contract)
+
+```php
+$user = User::first();
+$blogPost = BlogPost::first();
+
+$comment = $blogPost->addCommentFrom($user, 'my comment');
+```
+
+3. You can also comment with the User model (or the model that implements the `CanComment` contract) by using the `comment` method.
+
+```php
+$user = User::first();
+$blogPost = BlogPost::first();
+
+$comment = $user->comment($blogPost, 'my comment');
+```
+
 ### Get comments
 
 1. You can get all the user comments with the `comments` method
