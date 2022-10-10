@@ -2,10 +2,11 @@
 
 namespace Alfonsobries\LaravelCommentable\Models;
 
-use Alfonsobries\LaravelCommentable\Enums\CommentReactionTypeEnum;
-use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Alfonsobries\LaravelCommentable\Enums\CommentReactionTypeEnum;
 
 class CommentReaction extends Model
 {
@@ -50,5 +51,15 @@ class CommentReaction extends Model
     public function comment(): BelongsTo
     {
         return $this->belongsTo(config('laravel-commentable.models.comment'), 'comment_id');
+    }
+
+    public function scopeLikes(Builder $query): Builder
+    {
+        return $query->where('type', CommentReactionTypeEnum::Like);
+    }
+
+    public function scopeDislikes(Builder $query): Builder
+    {
+        return $query->where('type', CommentReactionTypeEnum::Dislike);
     }
 }

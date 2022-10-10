@@ -7,6 +7,7 @@ use Alfonsobries\LaravelCommentable\Contracts\CommentableInterface;
 use Alfonsobries\LaravelCommentable\Traits\Approvable;
 use Alfonsobries\LaravelCommentable\Traits\Commentable;
 use Alfonsobries\LaravelCommentable\Traits\HasCommentEvents;
+use Alfonsobries\LaravelCommentable\Traits\HasReactions;
 use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,7 @@ class Comment extends Model implements CommentableInterface
 {
     use UsesUuid;
     use HasCommentEvents;
+    use HasReactions;
     use SoftDeletes;
     use Approvable;
     use Commentable;

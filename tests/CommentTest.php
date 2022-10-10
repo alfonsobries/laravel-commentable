@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Alfonsobries\LaravelCommentable\Models\Comment;
 use Tests\Fixtures\Models\Agent;
 use Tests\Fixtures\Models\Commentable;
+use Alfonsobries\LaravelCommentable\Enums\CommentReactionTypeEnum;
 
 test('a comment has an agent', function () {
     $agent = Agent::create();
@@ -120,4 +121,65 @@ it('uses the table name from the config file', function () {
     config(['laravel-commentable.tables.comments' => 'custom_comments']);
 
     expect($comment->getTable())->toBe('custom_comments');
+});
+
+test('an agent can react to a comment', function () {
+    $agent = Agent::create();
+    $commentable = Commentable::create();
+    $comment = $agent->comment($commentable, 'This is a comment');
+
+    $comment->react(CommentReactionTypeEnum::Like, $agent);
+
+    expect($comment->reactions()->count())->toBe(1);
+
+    $comment->react(CommentReactionTypeEnum::Dislike, $agent);
+
+    expect($comment->reactions()->count())->toBe(2);
+});
+
+test('an agent can like a comment', function () {
+    $agent = Agent::create();
+    $commentable = Commentable::create();
+    $comment = $agent->comment($commentable, 'This is a comment');
+
+    $comment->like($agent);
+
+    expect($comment->reactions()->count())->toBe(1);
+
+    expect($comment->likes()->count())->toBe(1);
+
+    expect($comment->dislikes()->count())->toBe(0);
+});
+
+test('an agent can dislike a comment', function () {
+    $agent = Agent::create();
+    $commentable = Commentable::create();
+    $comment = $agent->comment($commentable, 'This is a comment');
+
+    $comment->dislike($agent);
+
+    expect($comment->reactions()->count())->toBe(1);
+
+    expect($comment->dislikes()->count())->toBe(1);
+
+    expect($comment->likes()->count())->toBe(0);
+});
+
+
+test('accepts reactions without agent', function () {
+    $agent = Agent::create();
+    $commentable = Commentable::create();
+    $comment = $agent->comment($commentable, 'This is a comment');
+
+    $comment->react(CommentReactionTypeEnum::Dislike);
+
+    $comment->like();
+
+    $comment->dislike();
+
+    expect($comment->reactions()->count())->toBe(3);
+
+    expect($comment->likes()->count())->toBe(1);
+
+    expect($comment->dislikes()->count())->toBe(2);
 });

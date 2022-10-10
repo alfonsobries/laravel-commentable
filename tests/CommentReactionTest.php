@@ -38,3 +38,37 @@ test('the reaction has a comment model', function () {
     expect($this->commentReaction->comment())->toBeInstanceOf(BelongsTo::class);
     expect($this->commentReaction->comment)->toBeInstanceOf(Comment::class);
 });
+
+it('filters likes reactions', function () {
+    CommentReaction::forceCreate([
+        'comment_id' => $this->comment->id,
+        'agent_id' => Agent::create()->id,
+        'type' => CommentReactionTypeEnum::Like,
+    ]);
+
+    CommentReaction::forceCreate([
+        'comment_id' => $this->comment->id,
+        'agent_id' =>  Agent::create()->id,
+        'type' => CommentReactionTypeEnum::Dislike,
+    ]);
+
+    // The one created in the beforeEach method + the one created here
+    expect(CommentReaction::likes()->count())->toBe(2);
+});
+
+it('filters dislikes reactions', function () {
+    CommentReaction::forceCreate([
+        'comment_id' => $this->comment->id,
+        'agent_id' => Agent::create()->id,
+        'type' => CommentReactionTypeEnum::Like,
+    ]);
+
+    CommentReaction::forceCreate([
+        'comment_id' => $this->comment->id,
+        'agent_id' =>  Agent::create()->id,
+        'type' => CommentReactionTypeEnum::Dislike,
+    ]);
+
+    // The one created in the beforeEach method + the one created here is like
+    expect(CommentReaction::dislikes()->count())->toBe(1);
+});
