@@ -12,7 +12,9 @@ trait UsesUuid
     public static function bootUsesUuid(): void
     {
         static::creating(function (Model $model) {
-            $model->uuid = $model->uuid ?? (string) Uuid::uuid4();
+            /** @var mixed $model */
+            $uuid = $model->uuid;
+            $model->uuid = $uuid ?? (string) Uuid::uuid4();
         });
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Alfonsobries\LaravelCommentable\Events;
 
-use Alfonsobries\LaravelCommentable\Models\Comment;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\SerializesModels;
 
 class CommentCreating
 {
     use SerializesModels;
 
-    public function __construct(public Comment $comment)
+    public function __construct(public Model $comment)
     {
     }
 }

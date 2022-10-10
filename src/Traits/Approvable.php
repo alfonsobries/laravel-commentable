@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Alfonsobries\LaravelCommentable\Traits;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Query\Builder;
 
 trait Approvable
 {

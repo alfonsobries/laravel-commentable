@@ -12,7 +12,11 @@ use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
+/**
+ * @property ?Carbon $approved_at
+ */
 class Comment extends Model implements CommentableInterface
 {
     use UsesUuid;
