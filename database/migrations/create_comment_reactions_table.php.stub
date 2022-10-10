@@ -1,0 +1,38 @@
+@@ -0,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create(config('laravel-commentable.tables.comment_reaction'), function (Blueprint $table) {
+            $table->id();
+            $table->uuid('uuid');
+            $table->foreignIdFor(config('laravel-commentable.models.comment'), 'comment_id');
+            $table->foreignId('agent_id')->nullable();
+            $table->string('type');
+            $table->ipAddress('ip_address')->nullable();
+            $table->string('user_agent')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists(config('laravel-commentable.tables.comment_reaction'));
+    }
+};

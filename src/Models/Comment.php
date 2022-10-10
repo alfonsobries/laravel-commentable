@@ -35,6 +35,15 @@ class Comment extends Model implements CommentableInterface
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'approved_at' => 'datetime',
+    ];
+
+    /**
      * Get the table associated with the model.
      *
      * @return string
@@ -43,15 +52,6 @@ class Comment extends Model implements CommentableInterface
     {
         return config('laravel-commentable.tables.comments');
     }
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'approved_at' => 'datetime',
-    ];
 
     public function agent(): BelongsTo
     {

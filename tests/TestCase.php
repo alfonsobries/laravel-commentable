@@ -63,6 +63,10 @@ abstract class TestCase extends Orchestra
         // Run the comment migration
         $commentMigration = new (require __DIR__ . '/../database/migrations/create_comments_table.php.stub');
         $commentMigration->up();
+
+        // Run the comment reaction migration
+        $commentReactionMigration = new (require __DIR__ . '/../database/migrations/create_comment_reactions_table.php.stub');
+        $commentReactionMigration->up();
     }
 
     /**
