@@ -41,6 +41,13 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alfonsobries\\LaravelCommentable\\LaravelCommentableServiceProvider"
+            ]
+        }
+    },
     "scripts": {
         "analyse": "./vendor/bin/phpstan analyse",
         "refactor": "./vendor/bin/rector process",
