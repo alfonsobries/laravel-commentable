@@ -8,6 +8,8 @@ use Alfonsobries\LaravelCommentable\Events\CommentCreated;
 use Alfonsobries\LaravelCommentable\Events\CommentCreating;
 use Alfonsobries\LaravelCommentable\Events\CommentDeleted;
 use Alfonsobries\LaravelCommentable\Events\CommentDeleting;
+use Alfonsobries\LaravelCommentable\Events\CommentSaved;
+use Alfonsobries\LaravelCommentable\Events\CommentSaving;
 use Alfonsobries\LaravelCommentable\Events\CommentUpdated;
 use Alfonsobries\LaravelCommentable\Events\CommentUpdating;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +18,14 @@ trait HasCommentEvents
 {
     public static function bootHasCommentEvents(): void
     {
+        static::saving(function (Model $model) {
+            event(new CommentSaving($model));
+        });
+
+        static::saved(function (Model $model) {
+            event(new CommentSaved($model));
+        });
+
         static::creating(function (Model $model) {
             event(new CommentCreating($model));
         });
