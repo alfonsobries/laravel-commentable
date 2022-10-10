@@ -142,6 +142,16 @@ $comments = User::first()->comments();
 $comments = BlogPost::first()->comments();
 ```
 
+### Sort comments
+
+Sort the comments by popularity (average positive likes) by using the `popular` and `unpopular` scope methods.
+
+```php
+$popularComments = BlogPost::first()->comments()->popular()->get();
+
+$unpopularComments = BlogPost::first()->comments()->unpopular()->get();
+```
+
 ### Update comments
 
 Since the `Comment` object is just a regular Eloquent Model you can use any of the different ways to update the models.
