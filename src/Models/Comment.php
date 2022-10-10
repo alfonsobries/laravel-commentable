@@ -2,6 +2,7 @@
 
 namespace Alfonsobries\LaravelCommentable\Models;
 
+use Alfonsobries\LaravelCommentable\Traits\Approvable;
 use Alfonsobries\LaravelCommentable\Traits\HasCommentEvents;
 use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,7 @@ class Comment extends Model
     use UsesUuid;
     use HasCommentEvents;
     use SoftDeletes;
+    use Approvable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +28,15 @@ class Comment extends Model
         'agent_id',
         'ip_address',
         'user_agent',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'approved_at' => 'datetime',
     ];
 
     public function agent(): BelongsTo
