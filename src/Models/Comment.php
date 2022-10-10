@@ -2,11 +2,14 @@
 
 namespace Alfonsobries\LaravelCommentable\Models;
 
+use Alfonsobries\LaravelCommentable\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
 {
+    use UsesUuid;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -30,4 +33,5 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+
 }
