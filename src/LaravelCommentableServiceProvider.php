@@ -17,8 +17,10 @@ class LaravelCommentableServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/laravel-commentable.php' => config_path('laravel-commentable.php'),
-        ]);
+        ], 'config');
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->publishes([
+            __DIR__.'/../database/migrations/create_comments_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_comments_table.php'),
+        ], 'migrations');
     }
 }

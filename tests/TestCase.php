@@ -59,8 +59,9 @@ abstract class TestCase extends Orchestra
             $table->timestamps();
         });
 
+
         // Run the comment migration
-        $commentMigration = new (require __DIR__ . '/../database/migrations/2022_10_09_170445_create_comments_table.php');
+        $commentMigration = new (require __DIR__ . '/../database/migrations/create_comments_table.php.stub');
         $commentMigration->up();
     }
 
