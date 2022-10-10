@@ -12,7 +12,20 @@ composer require alfonsobries/laravel-commentable
 
 ## Use
 
-1. Configure the model that is going to receive the comments with the `HasComments` contract and add the `Commentable` trait.
+1. Publish the database migration
+
+```console
+php artisan vendor:publish --provider="Alfonsobries\LaravelCommentable\LaravelCommentableServiceProvider" --tag="migrations"
+```
+
+2. Optionally publish the config file
+
+```console
+php artisan vendor:publish --provider="Alfonsobries\LaravelCommentable\LaravelCommentableServiceProvider" --tag="config"
+```
+
+
+3. Configure the model that is going to receive the comments with the `HasComments` contract and add the `Commentable` trait.
 
 ```php
 <?php
@@ -31,7 +44,7 @@ class BlogPost extends Model implements HasComments
 }
 ```
 
-2. Add the `CanComment` contract and the `CanCommentTrait` trait to the model that is going to add the comment (usually the `User` Model).
+4. Add the `CanComment` contract and the `CanCommentTrait` trait to the model that is going to add the comment (usually the `User` Model).
 
 ```php
 <?php
@@ -50,7 +63,7 @@ class User extends Model implements CanComment
 }
 ```
 
-3. Use the `addComment` method to add an anonymous comment
+5. Use the `addComment` method to add an anonymous comment
 
 
 ```php
@@ -59,7 +72,7 @@ $blogPost = BlogPost::first();
 $comment = $blogPost->addComment('my comment');
 ```
 
-4. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanComment` contract)
+6. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanComment` contract)
 
 
 ```php
@@ -69,7 +82,7 @@ $blogPost = BlogPost::first();
 $comment = $blogPost->addCommentFrom($user, 'my comment');
 ```
 
-5. You can also comment with the User model (or the model that implements the `CanComment` contract) by using the `comment` method.
+7. You can also comment with the User model (or the model that implements the `CanComment` contract) by using the `comment` method.
 
 ```php
 $user = User::first();
@@ -78,18 +91,17 @@ $blogPost = BlogPost::first();
 $comment = $user->comment($blogPost, 'my comment');
 ```
 
-6. You can get all the user comments with the `comments` method
+8. You can get all the user comments with the `comments` method
 
 ```php
 $comments = User::first()->comments();
 ```
 
-6. You can get all the comments associated with the commentable model with the `comments` method
+9. You can get all the comments associated with the commentable model with the `comments` method
 
 ```php
 $comments = BlogPost::first()->comments();
 ```
-
 
 ### Analyze the code with `phpstan`
 
