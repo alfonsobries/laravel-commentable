@@ -2,12 +2,12 @@
 
 A Laravel package to add comments to any model
 
-[![Stable Version](http://poser.pugx.org/alfonsobries/package-name/v)](https://packagist.org/packages/alfonsobries/package-name) [![License](http://poser.pugx.org/alfonsobries/package-name/license)](https://packagist.org/packages/alfonsobries/package-name) [![PHP Version Require](http://poser.pugx.org/alfonsobries/package-name/require/php)](https://packagist.org/packages/alfonsobries/package-name)
+[![Stable Version](http://poser.pugx.org/alfonsobries/laravel-commentable/v)](https://packagist.org/packages/alfonsobries/laravel-commentable) [![License](http://poser.pugx.org/alfonsobries/laravel-commentable/license)](https://packagist.org/packages/alfonsobries/laravel-commentable) [![PHP Version Require](http://poser.pugx.org/alfonsobries/laravel-commentable/require/php)](https://packagist.org/packages/alfonsobries/laravel-commentable)
 
 ## Installation
 
 ```console
-composer require alfonsobries/package-name
+composer require alfonsobries/laravel-commentable
 ```
 
 ### Development
