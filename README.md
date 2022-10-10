@@ -1,4 +1,4 @@
-# My Package Name
+# Laravel Commentable
 
 A Laravel package to add comments to any model
 
