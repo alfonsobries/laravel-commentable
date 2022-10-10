@@ -1,6 +1,6 @@
 # My Package Name
 
-TBD: Describe your project here
+A Laravel package to add comments to any model
 
 [![Stable Version](http://poser.pugx.org/alfonsobries/package-name/v)](https://packagist.org/packages/alfonsobries/package-name) [![License](http://poser.pugx.org/alfonsobries/package-name/license)](https://packagist.org/packages/alfonsobries/package-name) [![PHP Version Require](http://poser.pugx.org/alfonsobries/package-name/require/php)](https://packagist.org/packages/alfonsobries/package-name)
 

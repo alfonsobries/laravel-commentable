@@ -1,5 +1,5 @@
 {
-    "name": "alfonsobries/my-package-name",
+    "name": "alfonsobries/laravel-commentable",
     "description": "TBD",
     "type": "library",
     "license": "MIT",
@@ -30,12 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Alfonsobries\\PackageName\\": "src/"
+            "Alfonsobries\\LaravelCommentable\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Tests\\Fixtures\\": "tests/fixtures"
         }
     },
     "minimum-stability": "dev",
