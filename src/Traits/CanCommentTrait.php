@@ -8,13 +8,15 @@ use Alfonsobries\LaravelCommentable\Contracts\HasComments;
 use Alfonsobries\LaravelCommentable\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-trait CanComment
+trait CanCommentTrait
 {
     public function comment(HasComments $commentable, string $comment): Comment
     {
         return $commentable->comments()->create([
             'comment' => $comment,
             'agent_id' => $this->id,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
         ]);
     }
 
