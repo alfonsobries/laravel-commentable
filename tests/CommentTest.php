@@ -180,3 +180,82 @@ test('accepts reactions without agent', function () {
 
     expect($comment->dislikes()->count())->toBe(2);
 });
+
+test('it sorts the comments by creation date', function () {
+    $agent        = Agent::create();
+    $agent2       = Agent::create();
+    $agent3       = Agent::create();
+    $agent4       = Agent::create();
+    $commentable  = Commentable::create();
+
+    $this->travelTo(now()->subDays(2));
+    $comment3     = $agent->comment($commentable, 'This is a comment');
+
+    $this->travelBack();
+    $this->travelTo(now()->subDays(1));
+    $comment1     = $agent2->comment($commentable, 'This is a comment 2');
+
+    $this->travelBack();
+    $this->travelTo(now()->subWeek(1));
+    $comment4     = $agent3->comment($commentable, 'This is a comment 3');
+
+    $this->travelBack();
+    $this->travelTo(now()->subDay(1)->subHour(1));
+    $comment2     = $agent4->comment($commentable, 'This is a comment 4');
+
+    $comments = Comment::latest()->get();
+
+    expect($comments->get(0)->id)->toBe($comment1->id);
+    expect($comments->get(1)->id)->toBe($comment2->id);
+    expect($comments->get(2)->id)->toBe($comment3->id);
+    expect($comments->get(3)->id)->toBe($comment4->id);
+});
+
+test('it sorts the comments by popularity (average likes)', function () {
+    $agent        = Agent::create();
+    $agent2       = Agent::create();
+    $agent3       = Agent::create();
+    $agent4       = Agent::create();
+    $agent5       = Agent::create();
+    $commentable  = Commentable::create();
+
+    $comment4     = $agent->comment($commentable, 'This is a comment');
+    // Total likes: 2-2 =0
+    $comment4->like($agent);
+    $comment4->dislike($agent2);
+    $comment4->like($agent3);
+    $comment4->dislike($agent4);
+
+    $comment1     = $agent2->comment($commentable, 'This is a comment 2');
+    // Total likes: 4
+    $comment1->like($agent);
+    $comment1->like($agent2);
+    $comment1->like($agent3);
+    $comment1->like($agent4);
+
+    $comment3  = $agent3->comment($commentable, 'This is a comment 3');
+    // Total likes: 1
+    $comment3->like($agent);
+
+    $comment2 = $agent4->comment($commentable, 'This is a comment 4');
+    // Total likes: 3 (4-1)
+    $comment2->like($agent);
+    $comment2->dislike($agent2);
+    $comment2->like($agent3);
+    $comment2->like($agent4);
+    $comment2->like($agent5);
+
+    $comments = Comment::popular()->get();
+
+    expect($comments->get(0)->id)->toBe($comment1->id);
+    expect($comments->get(1)->id)->toBe($comment2->id);
+    expect($comments->get(2)->id)->toBe($comment3->id);
+    expect($comments->get(3)->id)->toBe($comment4->id);
+
+    $comments = Comment::unpopular()->get();
+
+    expect($comments->get(0)->id)->toBe($comment4->id);
+    expect($comments->get(1)->id)->toBe($comment3->id);
+    expect($comments->get(2)->id)->toBe($comment2->id);
+    expect($comments->get(3)->id)->toBe($comment1->id);
+});
