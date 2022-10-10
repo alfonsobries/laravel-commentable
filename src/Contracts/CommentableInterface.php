@@ -7,7 +7,7 @@ namespace Alfonsobries\LaravelCommentable\Contracts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-interface HasComments
+interface CommentableInterface
 {
     public function comments(): MorphMany;
 

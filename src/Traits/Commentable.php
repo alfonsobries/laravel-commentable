@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Alfonsobries\LaravelCommentable\Traits;
 
-use Alfonsobries\LaravelCommentable\Contracts\CanComment;
+use Alfonsobries\LaravelCommentable\Contracts\CanCommentInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -25,7 +25,7 @@ trait Commentable
         ]);
     }
 
-    public function addCommentFrom(CanComment $agent, string $comment, array $extraAttributes = []): Model
+    public function addCommentFrom(CanCommentInterface $agent, string $comment, array $extraAttributes = []): Model
     {
         return $this->addComment($comment, [
             'agent_id' => $agent->getKey(),

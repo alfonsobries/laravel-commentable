@@ -27,40 +27,40 @@ php artisan vendor:publish --provider="Alfonsobries\LaravelCommentable\LaravelCo
 ```
 
 
-4. Configure the model that is going to receive the comments with the `HasComments` contract and add the `Commentable` trait.
+4. Configure the model that is going to receive the comments with the `CommentableInterface` contract and add the `Commentable` trait.
 
 ```php
 <?php
 
 namespace App\Models;
 
-use Alfonsobries\LaravelCommentable\Contracts\HasComments;
+use Alfonsobries\LaravelCommentable\Contracts\CommentableInterface;
 use Alfonsobries\LaravelCommentable\Traits\Commentable;
 use Illuminate\Database\Eloquent\Model;
 
 
-class BlogPost extends Model implements HasComments
+class BlogPost extends Model implements CommentableInterface
 {
     use Commentable;
     // ...
 }
 ```
 
-5. Add the `CanComment` contract and the `CanCommentTrait` trait to the model that is going to add the comment (usually the `User` Model). Notice that this is optional if you are going to add anonymous comments.
+5. Add the `CanCommentInterface` contract and the `CanComment` trait to the model that is going to add the comment (usually the `User` Model). Notice that this is optional if you are going to add anonymous comments.
 
 ```php
 <?php
 
 namespace App\Models;
 
-use Alfonsobries\LaravelCommentable\Contracts\CanComment;
-use Alfonsobries\LaravelCommentable\Traits\CanCommentTrait;
+use Alfonsobries\LaravelCommentable\Contracts\CanCommentInterface;
+use Alfonsobries\LaravelCommentable\Traits\CanComment;
 use Illuminate\Database\Eloquent\Model;
 
 
-class User extends Model implements CanComment
+class User extends Model implements CanCommentInterface
 {
-    use CanCommentTrait;
+    use CanComment;
     // ...
 }
 ```
@@ -76,7 +76,7 @@ $blogPost = BlogPost::first();
 $comment = $blogPost->addComment('my comment');
 ```
 
-2. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanComment` contract)
+2. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanCommentInterface` contract)
 
 ```php
 $user = User::first();
@@ -85,7 +85,7 @@ $blogPost = BlogPost::first();
 $comment = $blogPost->addCommentFrom($user, 'my comment');
 ```
 
-3. You can also comment with the User model (or the model that implements the `CanComment` contract) by using the `comment` method.
+3. You can also comment with the User model (or the model that implements the `CanCommentInterface` contract) by using the `comment` method.
 
 ```php
 $user = User::first();
@@ -110,7 +110,7 @@ $comment = $blogPost->commentFrom($user, 'my comment');
 $comment->replyFrom($user2, 'a reply');
 ```
 
-2. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanComment` contract)
+2. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanCommentInterface` contract)
 
 ```php
 $user = User::first();
@@ -119,7 +119,7 @@ $blogPost = BlogPost::first();
 $comment = $blogPost->addCommentFrom($user, 'my comment');
 ```
 
-3. You can also comment with the User model (or the model that implements the `CanComment` contract) by using the `comment` method.
+3. You can also comment with the User model (or the model that implements the `CanCommentInterface` contract) by using the `comment` method.
 
 ```php
 $user = User::first();

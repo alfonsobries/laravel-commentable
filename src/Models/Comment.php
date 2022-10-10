@@ -2,8 +2,8 @@
 
 namespace Alfonsobries\LaravelCommentable\Models;
 
-use Alfonsobries\LaravelCommentable\Contracts\CanComment;
-use Alfonsobries\LaravelCommentable\Contracts\HasComments;
+use Alfonsobries\LaravelCommentable\Contracts\CanCommentInterface;
+use Alfonsobries\LaravelCommentable\Contracts\CommentableInterface;
 use Alfonsobries\LaravelCommentable\Traits\Approvable;
 use Alfonsobries\LaravelCommentable\Traits\Commentable;
 use Alfonsobries\LaravelCommentable\Traits\HasCommentEvents;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Comment extends Model implements HasComments
+class Comment extends Model implements CommentableInterface
 {
     use UsesUuid;
     use HasCommentEvents;
@@ -58,7 +58,7 @@ class Comment extends Model implements HasComments
         return $this->addComment($comment, $extraAttributes);
     }
 
-    public function replyFrom(CanComment $agent, string $comment, array $extraAttributes = []): Model
+    public function replyFrom(CanCommentInterface $agent, string $comment, array $extraAttributes = []): Model
     {
         return $this->addCommentFrom($agent, $comment, $extraAttributes);
     }

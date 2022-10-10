@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Alfonsobries\LaravelCommentable\Traits;
 
-use Alfonsobries\LaravelCommentable\Contracts\HasComments;
 use Alfonsobries\LaravelCommentable\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Alfonsobries\LaravelCommentable\Contracts\CommentableInterface;
 
-trait CanCommentTrait
+trait CanComment
 {
-    public function comment(HasComments $commentable, string $comment): Comment
+    public function comment(CommentableInterface $commentable, string $comment): Comment
     {
         return $commentable->comments()->create([
             'comment' => $comment,

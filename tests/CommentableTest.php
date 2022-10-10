@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Alfonsobries\LaravelCommentable\Contracts\CanComment;
+use Alfonsobries\LaravelCommentable\Contracts\CanCommentInterface;
 use Alfonsobries\LaravelCommentable\Models\Comment;
 use Tests\Fixtures\Models\Agent;
 use Tests\Fixtures\Models\Commentable;
@@ -39,7 +39,7 @@ test('a commentable can receive a comment from an agent', function () {
 
     expect($comment->agent_id)->toBe($agent->id);
 
-    expect($comment->agent)->toBeInstanceOf(CanComment::class);
+    expect($comment->agent)->toBeInstanceOf(CanCommentInterface::class);
 });
 
 

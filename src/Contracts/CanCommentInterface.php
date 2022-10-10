@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Alfonsobries\LaravelCommentable\Contracts;
 
-use Alfonsobries\LaravelCommentable\Contracts\HasComments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-interface CanComment
+interface CanCommentInterface
 {
-    public function comment(HasComments $commentable, string $comment): Model;
+    public function comment(CommentableInterface $commentable, string $comment): Model;
 
     public function comments(): HasMany;
 
