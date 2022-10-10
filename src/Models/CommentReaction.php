@@ -34,7 +34,7 @@ class CommentReaction extends Model
 
     public function agent(): BelongsTo
     {
-        return $this->belongsTo(config('laravel-commentable.models.agent'));
+        return $this->belongsTo(config('laravel-commentable.models.agent'), 'agent_id');
     }
 
     /**
@@ -49,6 +49,6 @@ class CommentReaction extends Model
 
     public function comment(): BelongsTo
     {
-        return $this->belongsTo(config('laravel-commentable.models.comment'));
+        return $this->belongsTo(config('laravel-commentable.models.comment'), 'comment_id');
     }
 }

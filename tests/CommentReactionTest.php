@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Alfonsobries\LaravelCommentable\Enums\CommentReactionTypeEnum;
 use Alfonsobries\LaravelCommentable\Models\Comment;
 use Alfonsobries\LaravelCommentable\Models\CommentReaction;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Tests\Fixtures\Models\Agent;
 use Tests\Fixtures\Models\Commentable;
 
@@ -13,7 +14,6 @@ beforeEach(function () {
         'commentable_id' => 1,
         'commentable_type' => Commentable::class,
         'agent_id' => 1,
-        'agent_type' => 'App\Models\Agent',
         'comment' => 'This is a comment',
     ]);
 
@@ -32,4 +32,9 @@ it('uses the table name from the config file', function () {
     config(['laravel-commentable.tables.comment_reaction' => 'custom_comment_reaction']);
 
     expect($this->commentReaction->getTable())->toBe('custom_comment_reaction');
+});
+
+test('the reaction has a comment model', function () {
+    expect($this->commentReaction->comment())->toBeInstanceOf(BelongsTo::class);
+    expect($this->commentReaction->comment)->toBeInstanceOf(Comment::class);
 });
