@@ -39,6 +39,11 @@ test('the reaction has a comment model', function () {
     expect($this->commentReaction->comment)->toBeInstanceOf(Comment::class);
 });
 
+test('the reaction has an agent model', function () {
+    expect($this->commentReaction->agent())->toBeInstanceOf(BelongsTo::class);
+    expect($this->commentReaction->agent)->toBeInstanceOf(Agent::class);
+});
+
 it('filters likes reactions', function () {
     CommentReaction::forceCreate([
         'comment_id' => $this->comment->id,
