@@ -46,7 +46,7 @@ class BlogPost extends Model implements CommentableInterface
 }
 ```
 
-5. Add the `CanCommentInterface` contract and the `CanComment` trait to the model that is going to add the comment (usually the `User` Model). Notice that this is optional if you are going to add anonymous comments.
+5. Add the `CanCommentInterface` contract and the `CanComment` trait to the model that is going to add the comment (usually the `User` Model). Since you can add anonymous comments this is only necessary if you want to accept User comments.
 
 ```php
 <?php
