@@ -76,7 +76,7 @@ $blogPost = BlogPost::first();
 $comment = $blogPost->addComment('my comment');
 ```
 
-2. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanCommentInterface` contract)
+2. Use the `addCommentFrom` method to add a comment from a User (or the model that implements the `CanCommentInterface` contract)
 
 ```php
 $user = User::first();
