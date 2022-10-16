@@ -98,7 +98,7 @@ $comment = $user->comment($blogPost, 'my comment');
 
 1. The `Comment` method is another commentable instance, meaning you can use the `addComment` or `addCommentFrom` method to add a reply.
 
-2. You can also use the `reply` and `replyFrom` methods that are just an alias for the comments above. 
+2. You can also use the `reply` and `replyFrom` methods that are just an alias for the comment methods above. 
 
 
 ```php
@@ -110,7 +110,7 @@ $comment = $blogPost->commentFrom($user, 'my comment');
 $comment->replyFrom($user2, 'a reply');
 ```
 
-2. Use the `addCommentFrom` method to add an anonymous comment from the User (or the model that implements the `CanCommentInterface` contract)
+2. Use the `addCommentFrom` method to add a comment from the User (or the model that implements the `CanCommentInterface` contract)
 
 ```php
 $user = User::first();
